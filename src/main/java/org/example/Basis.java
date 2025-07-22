@@ -1,5 +1,6 @@
 package org.example;
 
+import java.security.KeyPair;
 import java.util.Scanner;
 
 public class Basis {
@@ -9,7 +10,9 @@ public class Basis {
                 It's chapter about basis
                 Choose issue:
                 1 - Variable
-                2 - Concatenation""");
+                2 - Concatenation
+                3 - Concatenation and multiply on 2
+                4 - Concatenation and bonus""");
     }
 
     public static void chooseIssue(){
@@ -22,6 +25,7 @@ public class Basis {
                 System.out.println(result);
             }
             case "2" -> printWithDeleteSeparation();
+            case "3" -> concatenationAndMultiply();
             default -> System.out.println("Yor input wrong symbol");
         }
         scanner.close();
@@ -38,6 +42,33 @@ public class Basis {
     }
 
     /**
+     * Concatenation 2 variables (message and score),
+     * split by  " \\| " and multiply score on 2
+     */
+    public static void concatenationAndMultiply(){
+        String[] inputValue = readInput().split(" \\| ");
+        String message = inputValue[0];
+        int score = Integer.parseInt(inputValue[1]);
+        String result = String.format("%s %d", message, score * 2 );
+        System.out.println(result);
+    }
+
+    /** Concatenation 2 variables (message and score),
+     * split by  " \\| " and multiply score on bonus
+     */
+    public static void concatenationAndBonus(){
+        String message;
+        int score, bonus;
+
+        String[] inputValue = readInput().split(" \\| ");
+        message = inputValue[0];
+        score = Integer.parseInt(inputValue[1]);
+        bonus = Integer.parseInt(inputValue[2]);
+        String result = message + " " + score * bonus;
+        System.out.println(result);
+    }
+
+    /**
      * Function for read inside console
      * @return nextLine
      */
@@ -47,4 +78,6 @@ public class Basis {
         scanner.close();
         return inputLine;
     }
+
+
 }
