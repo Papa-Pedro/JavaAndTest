@@ -3,9 +3,14 @@ package org.example;
 import java.util.Scanner;
 
 public class Operators {
+/*
+    public String name = "";
+    public final String secondName = "Charlton";
+    public static String profession = "engineer";
+*/
 
     {
-        System.out.println("""
+       System.out.println("""
                 It's chapter about operators
                 Choose issue:
                 1 - Additional
@@ -16,7 +21,11 @@ public class Operators {
                 6 - Seconds per minutes
                 7 - Seconds per Hours
                 8 - Number was even
-                9 - Additional and division""");
+                9 - Additional and subtraction
+                10 - Multiply and division
+                11 - Equal two number
+                12 - ResultMyRole
+                13 - GroupAge""");
     }
 
     public static void chooseIssue(){
@@ -32,9 +41,56 @@ public class Operators {
             case "8" -> decideEvenOrNot();
             case "9" -> doAdditionalOrSubtraction();
             case "10" -> doMultiplyOrDivision();
+            case "11" -> equalTwoNumber();
+            case "12" -> resultMyRole();
+            case "13" -> defineGroupAge();
             default -> System.out.println("Yor input wrong symbol");
         }
         scanner.close();
+    }
+
+    /**
+     * define age group, if more 18 print "взрослый" else "подросток"
+     */
+    public static void defineGroupAge(){
+        int age = readNumber();
+        String result = "";
+        result = age >= 18 ? "взрослый" : "подросток";
+        System.out.println(result);
+    }
+
+    /**
+     * You have param name role, depending from value print
+     * 1 - admin
+     * 2 — moderator
+     * 3 — user
+     * default — guest
+     */
+    public static void resultMyRole() {
+        int role = readNumber();
+        String result = "";
+        result = switch (role)
+                {
+                    case 1 -> "admin";
+                    case 2 -> "moderator";
+                    case 3 -> "user";
+                    default -> "guest";
+                };
+        System.out.println(result);
+    }
+
+    /**
+     * equal number x and y (int)
+     * and print true is equal, else false
+     */
+    public static void equalTwoNumber(){
+        int x, y;
+        boolean result = false;
+        int[] inputValues = readInput();
+        x = inputValues[0];
+        y = inputValues[1];
+        if (x == y) result = true;
+        System.out.println(result);
     }
 
     public static void doMultiplyOrDivision(){
