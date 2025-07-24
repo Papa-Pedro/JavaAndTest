@@ -12,12 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-public class DefineEvenAndSixTest {
-
-    private final PrintStream originOutput = System.out;
-    private final InputStream originInput = System.in;
-
-    private ByteArrayOutputStream outputStream;
+public class DefineEvenAndSixTest extends BaseManageStructTest {
     private ByteArrayInputStream inputStream;
 
     @DataProvider(name = "validData")
@@ -28,18 +23,6 @@ public class DefineEvenAndSixTest {
                 {7, false},
                 {12, true}
         };
-    }
-
-    @AfterMethod
-    public void restoreStream(){
-        System.setOut(originOutput);
-        System.setIn(originInput);
-    }
-
-    @BeforeMethod
-    public void setUpStream(){
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
     }
 
     @Test(dataProvider = "validData")

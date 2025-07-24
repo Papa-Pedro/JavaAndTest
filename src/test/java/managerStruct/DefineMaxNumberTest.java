@@ -12,12 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-public class DefineMaxNumberTest {
-
-    private final PrintStream originOutput = System.out;
-    private final InputStream originInput = System.in;
-
-    private ByteArrayOutputStream outputStream;
+public class DefineMaxNumberTest extends BaseManageStructTest {
     private ByteArrayInputStream inputStream;
 
     @DataProvider(name = "validData")
@@ -27,18 +22,6 @@ public class DefineMaxNumberTest {
                 {"2 1 3", "минимальное: 1, максимальное: 3"},
                 {"2 4 3", "минимальное: 2, максимальное: 4"}
         };
-    }
-
-    @AfterMethod
-    public void restoreStream(){
-        System.setOut(originOutput);
-        System.setIn(originInput);
-    }
-
-    @BeforeMethod
-    public void setUpStream(){
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
     }
 
     @Test(dataProvider = "validData")

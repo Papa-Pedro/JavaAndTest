@@ -2,54 +2,79 @@ package managerStruct;
 
 import org.example.ManagerStruct;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
+import org.testng.annotations.*;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 
-public class DirectionPlayerTest {
-
-    private final PrintStream originOutput = System.out;
-    private final InputStream originInput = System.in;
-
-    private ByteArrayOutputStream outputStream;
+public class DirectionPlayerTest extends BaseManageStructTest {
     private ByteArrayInputStream inputStream;
 
-    @DataProvider(name = "validData")
-    private Object[] provideValidData() {
-        return new Object[][] {
-                //{data, response}
-                {"1 1 down", "x: 1, y: 2, direction: down"},
-                {"1 1 left", "x: 0, y: 1, direction: left"},
-                {"1 1 right", "x: 2, y: 1, direction: right"},
-                {"1 1 up", "x: 1, y: 0, direction: up"}
-        };
-    }
-
-    @AfterMethod
-    public void restoreStream(){
-        System.setOut(originOutput);
-        System.setIn(originInput);
-    }
-
-    @BeforeMethod
-    public void setUpStream(){
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-    }
-
     @Test(dataProvider = "validData")
-    public void positiveTest(String userData, String result){
-        inputStream = new ByteArrayInputStream((userData + "\n").getBytes());
+    public void validTest_insideSquare(String inputData, String resultFun, String context){
+        inputStream = new ByteArrayInputStream(inputData.getBytes());
         System.setIn(inputStream);
         ManagerStruct.directionPlayer();
         String output = outputStream.toString().trim();
-        Assert.assertEquals(output, result, "Проверка на валдных значениях");
+        Assert.assertEquals(output, resultFun, "Проблема в позиции: " + context);
     }
 
+    @Test
+    public void emptyInputTest() {
+        inputStream = new ByteArrayInputStream("\n".getBytes());
+        System.setIn(inputStream);
+        try {
+            ManagerStruct.directionPlayer();
+            Assert.fail("Ожидали IllegalArgumentException но ничего не пробросилось");
+        } catch (Throwable e) {
+            //compare exactly name of exception class
+            String actualName = e.getClass().getSimpleName();
+            String expectedName = "IllegalArgumentException";
+            Assert.assertEquals(
+                    actualName,
+                    expectedName,
+                    e.getMessage()
+            );
+        }
+    }
+
+    @Test(dataProvider = "inputNotValidData")
+    public void negativeTest_inputNotNumber(String input){
+        inputStream = new ByteArrayInputStream((input + "\n").getBytes());
+        System.setIn(inputStream);
+
+        try {
+            ManagerStruct.directionPlayer();
+            Assert.fail("Ожидали IllegalArgumentException но ничего не пробросилось");
+        } catch (Throwable e) {
+            String actualName   = e.getClass().getSimpleName();
+            String expectedName = "IllegalArgumentException";
+            Assert.assertEquals(
+                    actualName,
+                    expectedName,
+                    e.getMessage()
+            );
+        }
+
+
+    }
+
+    @DataProvider(name = "validData")
+    private Object[] provideValidDataInside() {
+        return new Object[][] {
+                //{inputData, outputData, position}
+                {"99    99 down", "x: 99, y: 100, direction: down", "inside"},
+                {"1 1 left", "x: 0, y: 1, direction: left", "inside"},
+                {"99 100 down", "x: 99, y: 100, direction: down", "outside"},
+                {"0 1     left", "x: 0, y: 1, direction: left", "outside"}
+        };
+    }
+
+    @DataProvider(name = "inputNotValidData")
+    private Object[] provideNotNumber() {
+        return new Object[][] {
+                {"99 one up"},
+                {"two 12 down"},
+                {"99 12 revert"}
+
+        };
+    }
 }
