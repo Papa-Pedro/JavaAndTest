@@ -1,6 +1,6 @@
 package managerStruct;
 
-import org.example.ManagerStruct;
+import org.example.managerStruct.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.io.ByteArrayInputStream;
@@ -58,7 +58,7 @@ public class DirectionPlayerTest extends BaseManageStructTest {
     }
 
     @DataProvider(name = "validData")
-    private Object[] provideValidDataInside() {
+    private Object[][] provideValidDataInside() {
         return new Object[][] {
                 //{inputData, outputData, position}
                 {"99    99 down", "x: 99, y: 100, direction: down", "inside"},
@@ -69,7 +69,7 @@ public class DirectionPlayerTest extends BaseManageStructTest {
     }
 
     @DataProvider(name = "inputNotValidData")
-    private Object[] provideNotNumber() {
+    private Object[][] provideNotNumber() {
         return new Object[][] {
                 {"99 one up"},
                 {"two 12 down"},

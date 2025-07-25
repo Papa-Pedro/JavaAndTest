@@ -1,13 +1,13 @@
 package managerStruct;
 
-import org.example.ManagerStruct;
+import org.example.managerStruct.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
 
-public class defineNumberIsNegativeTest extends BaseManageStructTest {
+public class DefineNumberIsNegativeTest extends BaseManageStructTest {
 
     private ByteArrayInputStream inputStream;
 
@@ -44,7 +44,7 @@ public class defineNumberIsNegativeTest extends BaseManageStructTest {
     }
 
     @DataProvider(name = "validInput")
-    private static Object[] provideValidData() {
+    private static Object[][] provideValidData() {
         return new Object[][] {
                 //inputData expectedResult
                 {"2",    "Число позитивное"},
