@@ -1,6 +1,7 @@
 package org.example.managerStruct;
 
-import resourse.TrioString;
+import resourse.Pair;
+import resourse.Trio;
 
 import java.util.*;
 
@@ -45,10 +46,7 @@ public class ManagerStruct {
     public static void multiplyOddUpTo(){
         int n = InputRead.readInt();
         if (n < 1) throw new IllegalArgumentException("Число для удовлетворения условий должно быть больше 1");
-        if (n % 2 == 0) n--;
-        int result = 1;
-        for (int i = (n % 2 == 0 ? n-1 : n); i > 0; i -= 2) result *= i;
-        System.out.println(result);
+        System.out.println(CalculateManagerStruct.calculateMultiplyOddUpTo(n));
     }
 
     /**
@@ -57,15 +55,8 @@ public class ManagerStruct {
      */
     public static void sumAllNotEvenNumber(){
         int n = InputRead.readInt();
-        if (n % 2 == 0)  {
-            throw new IllegalArgumentException("Введенная переменная должна быть четной");
-        }
-        int result = 0;
-        while (n > 0) {
-            result += n;
-            n -= 2;
-        }
-        System.out.println(result);
+        if (n % 2 == 0) throw new IllegalArgumentException("Введенная переменная должна быть четной");
+        System.out.println(CalculateManagerStruct.calculateSumAllNotEvenNumber(n));
     }
 
     /**
@@ -77,20 +68,12 @@ public class ManagerStruct {
      */
     public static void defineNumberIsNegative(){
         int n = InputRead.readInt();
-        String result = "";
-        //Integer.signum(n) возвращает знак числа
-        result = switch (Integer.signum(n)) {
-            case  1 -> "Число позитивное";
-            case -1 -> "Число негативное";
-            case  0 -> "Число равно 0";
-            default -> throw new IllegalStateException("Непредвиденная ситуация");
-        };
-        System.out.println(result);
+        System.out.println(CalculateManagerStruct.calculateDefineNumberIsNegative(n));
     }
 
     public static void directionPlayer(){
         //берем все три введенные символа в массиве
-        TrioString input = InputRead.readTrioString();
+        Trio<String, String, String> input = InputRead.readTrioString();
         //мы уверены что у нас не пустая строка и введено три символа
         //нам надо убедиться только что это числа
         int x, y;
@@ -100,17 +83,12 @@ public class ManagerStruct {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Первые два элемента должны быть числом");
         }
-
         String direction = input.third();
         //В случае если направление не важно выводим другую ошибку
-        switch (direction) {
-            case "up"    -> { if (y > 0) y -= 1; }
-            case "down"  -> { if (y < 100) y += 1; }
-            case "left"  -> { if (x > 0) x -= 1; }
-            case "right" -> { if (x < 100) x += 1; }
-            default -> throw new IllegalArgumentException("Направление может быть только ud, down, left или right а не " + direction);
-        }
-        System.out.println(String.format("x: %d, y: %d, direction: %s", x, y, direction));
+        Pair pair = CalculateManagerStruct.calculateDirectionPlayer(x, y , direction);
+        System.out.println(String.format(
+                "x: %d, y: %d, direction: %s",
+                pair.first(), pair.second(), direction));
     }
 
     public static void printStars(){

@@ -1,4 +1,4 @@
 package resourse;
 
 //Структура для работы со строкой ввода в три символа.
-public record TrioString(String first, String second, String third) {}
+public record Trio<A, B, C>(A first, B second, C third) {}

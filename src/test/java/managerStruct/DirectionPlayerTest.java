@@ -53,8 +53,6 @@ public class DirectionPlayerTest extends BaseManageStructTest {
                     e.getMessage()
             );
         }
-
-
     }
 
     @DataProvider(name = "validData")

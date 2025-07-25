@@ -11,25 +11,6 @@ public class SumAllNotEvenNumberTest extends BaseManageStructTest {
 
     private ByteArrayInputStream inputStream;
 
-    @DataProvider(name = "validData")
-    private static Object[][] provideValidData() {
-        return new Object[][] {
-                //inputData, expectResult
-                {"3", "4"},
-                {"5", "9"}
-        };
-    }
-
-    @DataProvider(name = "notValidData")
-    private static Object[][] provideNotValidData() {
-        return new Object[][] {
-                //inputData, message about input
-                {"one", "Input a string"},
-                {"\n", "Input empty string"},
-                {"8", "Input even number"}
-        };
-    }
-
     @Test(dataProvider = "validData", groups = "positive")
     public void directCheck(String inputData, String expectResult) {
         inputStream = new ByteArrayInputStream((inputData + "\n").getBytes());
@@ -59,6 +40,25 @@ public class SumAllNotEvenNumberTest extends BaseManageStructTest {
                     expectException,
                     "Ожидалось что с " + message + "мы получим исключение" + expectException + ". Получили " + e.getMessage()
             );
+        };
+    }
+
+    @DataProvider(name = "validData")
+    private static Object[][] provideValidData() {
+        return new Object[][] {
+                //inputData, expectResult
+                {"3", "4"},
+                {"5", "9"}
+        };
+    }
+
+    @DataProvider(name = "notValidData")
+    private static Object[][] provideNotValidData() {
+        return new Object[][] {
+                //inputData, message about input
+                {"one", "Input a string"},
+                {"\n", "Input empty string"},
+                {"8", "Input even number"}
         };
     }
 }

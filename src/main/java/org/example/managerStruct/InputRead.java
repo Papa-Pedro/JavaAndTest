@@ -1,6 +1,6 @@
 package org.example.managerStruct;
 
-import resourse.TrioString;
+import resourse.Trio;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 //класс финальный что бы его не использовали как родителя
 public final class InputRead {
     //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
-    public InputRead(){}
+    private InputRead(){}
 
     public static int readInt() {
         Scanner scanner = new Scanner(System.in);
@@ -23,7 +23,7 @@ public final class InputRead {
         } else throw new NoSuchElementException("Нет доступных строк для чтения");
     }
 
-    public static TrioString readTrioString(){
+    public static Trio readTrioString(){
         Scanner scanner = new Scanner(System.in);
         //trim() - удаляет лишние пробелы.
         String line = scanner.nextLine().trim();
@@ -42,7 +42,7 @@ public final class InputRead {
                     "Ожидалось 3 значения, а введено: " + parts.length
             );
         }
-        return new TrioString(parts[0], parts[1], parts[2]);
+        return new Trio<>(parts[0], parts[1], parts[2]);
     }
 
     public static int[] readInputArray(){
