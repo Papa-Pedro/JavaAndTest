@@ -15,9 +15,9 @@ public class DefineNotEvenAndSevenTest extends BaseManageStructTest {
     private Object[][] provideValidData() {
         return new Object[][] {
                 //{data, response}
-                {"7", true},
-                {"21", true},
-                {"14", false}
+                {7, true},
+                {21, true},
+                {14, false}
         };
     }
 
