@@ -3,14 +3,21 @@ package org.example.managerStruct;
 import resourse.Pair;
 import resourse.Trio;
 
+import java.io.PrintStream;
 import java.util.*;
 
 public class ManagerStruct {
 
-    //Точка входа, вызывается из Main
-    public static void chooseIssue() {
-        Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+    private final PrintStream out;
 
+    public ManagerStruct(Scanner scanner, PrintStream out) {
+        this.scanner = scanner;
+        this.out = out;
+    }
+
+    //Точка входа, вызывается из Main
+    public void chooseIssue() {
         System.out.println("""
                 It's chapter about operators
                 Choose issue:

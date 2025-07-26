@@ -1,8 +1,17 @@
 package org.example;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Operators {
+
+    private final Scanner scanner;
+    private final PrintStream out;
+
+    public Operators(Scanner scanner, PrintStream out) {
+        this.scanner = scanner;
+        this.out = out;
+    }
 
     {
        System.out.println("""
@@ -23,9 +32,9 @@ public class Operators {
                 13 - GroupAge""");
     }
 
-    public static void chooseIssue(){
-        Scanner scanner = new Scanner(System.in);
-        switch (scanner.nextLine()) {
+    public void chooseIssue(){
+        String line = scanner.nextLine().trim();
+        switch (line) {
             case "1" -> additionalTwoNumber();
             case "2" -> multiplyTwoNumber();
             case "3" -> subtractionTwoNumber();

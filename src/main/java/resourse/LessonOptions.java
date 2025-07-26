@@ -12,19 +12,22 @@ public enum LessonOptions {
     BASIS("1") {
         @Override
         public void execute(Scanner scanner, PrintStream out) {
-            new Basis().chooseIssue();
+            Basis basis = new Basis(scanner, out);
+            basis.chooseIssue();
         }
     },
     OPERATORS("2") {
         @Override
         public void execute(Scanner scanner, PrintStream out) {
-            Operators.chooseIssue();
+            Operators operators = new Operators(scanner, out);
+            operators.chooseIssue();
         }
     },
     MANAGER("3") {
         @Override
         public void execute(Scanner scanner, PrintStream out) {
-            new ManagerStruct().chooseIssue();
+            ManagerStruct managerStruct = new ManagerStruct(scanner, out);
+            managerStruct.chooseIssue();
         }
     },
     EXIT("0") {

@@ -1,9 +1,18 @@
 package org.example;
 
+import java.io.PrintStream;
 import java.security.KeyPair;
 import java.util.Scanner;
 
 public class Basis {
+
+    private final Scanner scanner;
+    private final PrintStream out;
+
+    public Basis(Scanner scanner, PrintStream out){
+        this.scanner = scanner;
+        this.out = out;
+    }
 
     {
         System.out.println("""
@@ -15,9 +24,9 @@ public class Basis {
                 4 - Concatenation and bonus""");
     }
 
-    public static void chooseIssue(){
-        Scanner scanner = new Scanner(System.in);
-        switch (scanner.nextLine()) {
+    public void chooseIssue() {
+        String line = scanner.nextLine().trim();
+        switch (line) {
             case "1" -> {
                 String message = readInput();
                 String result = "";
@@ -78,6 +87,5 @@ public class Basis {
         scanner.close();
         return inputLine;
     }
-
 
 }

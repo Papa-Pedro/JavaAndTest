@@ -40,19 +40,6 @@ public class LessonSelection {
             } else {
                 opt.execute(scanner, out);
             }
-//            switch (line) {
-//                case "1" -> {
-//                    Basis basis = new Basis();
-//                    basis.chooseIssue();
-//                }
-//                case "2" -> Operators.chooseIssue();
-//                case "3" -> {
-//                    ManagerStruct managerStruct = new ManagerStruct();
-//                    managerStruct.chooseIssue();
-//                }
-//                case "0" -> running = false;
-//                default -> out.println("Неправильный ввод");
-//            }
         }
     }
 }
