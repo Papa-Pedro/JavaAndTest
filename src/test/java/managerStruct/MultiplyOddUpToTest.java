@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 public class MultiplyOddUpToTest extends BaseManageStructTest {
 
@@ -36,7 +37,9 @@ public class MultiplyOddUpToTest extends BaseManageStructTest {
     public void directCheck(String inputData, String expectResult) {
         inputStream = new ByteArrayInputStream((inputData + "\n").getBytes());
         System.setIn(inputStream);
-        ManagerStruct.multiplyOddUpTo();
+        // Создаём экземляр с инфраструктурой ввода/вывода
+        ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+        managerStruct.directionPlayer();
         String actualResult = outputStream.toString().trim();
         Assert.assertEquals(
                 actualResult,
@@ -50,7 +53,8 @@ public class MultiplyOddUpToTest extends BaseManageStructTest {
         inputStream = new ByteArrayInputStream(inputData.getBytes());
         System.setIn(inputStream);
         try {
-            ManagerStruct.multiplyOddUpTo();
+            ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+            managerStruct.multiplyOddUpTo();
             Assert.fail("Ожидалось что будет исключение с " + message);
         } catch (Throwable e)
         {

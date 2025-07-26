@@ -12,6 +12,7 @@ public class ManagerStruct {
     private final Scanner scanner;
     private final PrintStream out;
 
+
     public ManagerStruct(Scanner scanner, PrintStream out) {
         this.scanner = scanner;
         this.out = out;
@@ -25,14 +26,22 @@ public class ManagerStruct {
         }
         out.println("Choose your item");
         //Ждем выбора пункта
+
         String input = scanner.nextLine().trim();
-        ManageOptions options = ManageOptions.fromCode(input, out);
+        ManageOptions options = ManageOptions.fromCode(input);
 
         if (options == null) {
             out.println("Невернный ввод: " + input);
         } else {
-            options.execute();
+           // InputRead inputRead = InputRead.of(scanner);
+            options.execute(this);
         }
+    }
+
+    public void sumEvenNumber(){
+        int n = InputRead.readInt(scanner);
+        int result = CalculateManagerStruct.calculateSumEvenNumber(n);
+        out.println(result);
     }
 
     /**
@@ -40,8 +49,8 @@ public class ManagerStruct {
      * until the number n, it has not even.
      * @throws InterruptedException если n < 1
      */
-    public static void multiplyOddUpTo(){
-        int n = InputRead.readInt();
+    public void multiplyOddUpTo(){
+        int n = InputRead.readInt(scanner);
         if (n < 1) throw new IllegalArgumentException("Число для удовлетворения условий должно быть больше 1");
         System.out.println(CalculateManagerStruct.calculateMultiplyOddUpTo(n));
     }
@@ -50,8 +59,8 @@ public class ManagerStruct {
      * Need calculate sum all not even number
      * until the number n, it has not even.
      */
-    public static void sumAllNotEvenNumber(){
-        int n = InputRead.readInt();
+    public void sumAllNotEvenNumber(){
+        int n = InputRead.readInt(scanner);
         if (n % 2 == 0) throw new IllegalArgumentException("Введенная переменная должна быть четной");
         System.out.println(CalculateManagerStruct.calculateSumAllNotEvenNumber(n));
     }
@@ -63,12 +72,12 @@ public class ManagerStruct {
      * if n equal 0 result = "Число равно 0"
      * result it's variable which print
      */
-    public static void defineNumberIsNegative(){
-        int n = InputRead.readInt();
+    public void defineNumberIsNegative(){
+        int n = InputRead.readInt(scanner);
         System.out.println(CalculateManagerStruct.calculateDefineNumberIsNegative(n));
     }
 
-    public static void directionPlayer(){
+    public void directionPlayer(){
         //берем все три введенные символа в массиве
         Trio<String, String, String> input = InputRead.readTrioString();
         //мы уверены что у нас не пустая строка и введено три символа
@@ -87,8 +96,8 @@ public class ManagerStruct {
                 pair.first(), pair.second(), direction));
     }
 
-    public static void printStars(){
-        int amount = InputRead.readInt();
+    public void printStars(){
+        int amount = InputRead.readInt(scanner);
         String result = "★".repeat(amount);
         System.out.println(result);
     }
@@ -97,7 +106,7 @@ public class ManagerStruct {
      * Define max element among x1, x2 and x3
      * writhe in inside variable result
      */
-    public static void defineMaxNumber() {
+    public void defineMaxNumber() {
         int[] arrayOfX = InputRead.readInputArray();//readInputArray();
        /* int max = Arrays.stream(arrayOfX).max().orElseThrow();
         int min = Arrays.stream(arrayOfX).min().orElseThrow();
@@ -105,14 +114,14 @@ public class ManagerStruct {
         System.out.println(CalculateManagerStruct.calculateDefineMaxNumber(arrayOfX));
     }
 
-    public static void defineEvenAndSix(){
-        int n = InputRead.readInt();
+    public void defineEvenAndSix(){
+        int n = InputRead.readInt(scanner);
         boolean result = (n % 2 == 0 && n % 6 == 0);
         System.out.println(result);
     }
 
-    public static void defineNotEvenAndSeven(){
-        int n = InputRead.readInt();
+    public void defineNotEvenAndSeven(){
+        int n = InputRead.readInt(scanner);
         boolean result = (n % 2 != 0 && n % 7 == 0);
         System.out.println(result);
     }

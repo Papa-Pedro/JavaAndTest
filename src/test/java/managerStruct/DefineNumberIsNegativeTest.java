@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 public class DefineNumberIsNegativeTest extends BaseManageStructTest {
 
@@ -16,7 +17,9 @@ public class DefineNumberIsNegativeTest extends BaseManageStructTest {
     public void directTest(String inputData, String expectedResult) {
         inputStream = new ByteArrayInputStream((inputData + "\n").getBytes());
         System.setIn(inputStream);
-        ManagerStruct.defineNumberIsNegative();
+        // Создаём экземляр с инфраструктурой ввода/вывода
+        ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+        managerStruct.defineNumberIsNegative();
         String actualResult = outputStream.toString().trim();
         Assert.assertEquals(
                 actualResult,
@@ -30,7 +33,9 @@ public class DefineNumberIsNegativeTest extends BaseManageStructTest {
         inputStream = new ByteArrayInputStream("Один\n".getBytes());
         System.setIn(inputStream);
         try {
-            ManagerStruct.defineNumberIsNegative();
+            // Создаём экземляр с инфраструктурой ввода/вывода
+            ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+            managerStruct.defineNumberIsNegative();
             Assert.fail("Ожидалось что будет исключение");
         } catch (Throwable e) {
             String actualException   = e.getClass().getSimpleName();

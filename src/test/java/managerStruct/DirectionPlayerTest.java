@@ -4,6 +4,7 @@ import org.example.managerStruct.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 public class DirectionPlayerTest extends BaseManageStructTest {
     private ByteArrayInputStream inputStream;
@@ -12,7 +13,9 @@ public class DirectionPlayerTest extends BaseManageStructTest {
     public void validTest_insideSquare(String inputData, String resultFun, String context){
         inputStream = new ByteArrayInputStream(inputData.getBytes());
         System.setIn(inputStream);
-        ManagerStruct.directionPlayer();
+        // Создаём экземляр с инфраструктурой ввода/вывода
+        ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+        managerStruct.directionPlayer();
         String output = outputStream.toString().trim();
         Assert.assertEquals(output, resultFun, "Проблема в позиции: " + context);
     }
@@ -22,7 +25,9 @@ public class DirectionPlayerTest extends BaseManageStructTest {
         inputStream = new ByteArrayInputStream("\n".getBytes());
         System.setIn(inputStream);
         try {
-            ManagerStruct.directionPlayer();
+            // Создаём экземляр с инфраструктурой ввода/вывода
+            ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+            managerStruct.directionPlayer();
             Assert.fail("Ожидали IllegalArgumentException но ничего не пробросилось");
         } catch (Throwable e) {
             //compare exactly name of exception class
@@ -40,9 +45,10 @@ public class DirectionPlayerTest extends BaseManageStructTest {
     public void negativeTest_inputNotNumber(String input){
         inputStream = new ByteArrayInputStream((input + "\n").getBytes());
         System.setIn(inputStream);
-
         try {
-            ManagerStruct.directionPlayer();
+            // Создаём экземляр с инфраструктурой ввода/вывода
+            ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+            managerStruct.directionPlayer();
             Assert.fail("Ожидали IllegalArgumentException но ничего не пробросилось");
         } catch (Throwable e) {
             String actualName   = e.getClass().getSimpleName();

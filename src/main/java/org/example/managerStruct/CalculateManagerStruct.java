@@ -8,6 +8,10 @@ public final class CalculateManagerStruct {
     //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
     private CalculateManagerStruct(){}
 
+    public static int calculateSumEvenNumber(int number) {
+        return (int) (Math.pow(number, 2) / 4 + 2);
+    }
+
     public static int calculateMultiplyOddUpTo(int number) {
        // System.out.println(number);
         int result = 1;

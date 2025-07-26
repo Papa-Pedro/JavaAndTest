@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 public class PrintStarsTest extends BaseManageStructTest {
 
@@ -25,7 +26,9 @@ public class PrintStarsTest extends BaseManageStructTest {
     public void positiveTest(int userData, String result){
         inputStream = new ByteArrayInputStream((userData + "\n").getBytes());
         System.setIn(inputStream);
-        ManagerStruct.printStars();
+        // Создаём экземляр с инфраструктурой ввода/вывода
+        ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+        managerStruct.printStars();
         String output = outputStream.toString().trim();
         Assert.assertEquals(output, result, "Проверка на валдных значениях");
     }

@@ -2,37 +2,39 @@ package resourse.chouseEnum;
 
 import org.example.managerStruct.ManagerStruct;
 
-import java.io.PrintStream;
+import java.util.function.Consumer;
 
 public enum ManageOptions {
 
     CHECK_ODD_AND_SEVEN("1", "Проверить нечётность и делимость на 7",
-            () -> ManagerStruct.defineNotEvenAndSeven()),
+            ManagerStruct::defineNotEvenAndSeven),
     CHECK_EVEN_AND_SIX("2", "Проверить на четность и делимость на 6",
-            () -> ManagerStruct.defineEvenAndSix()),
+            ManagerStruct::defineEvenAndSix),
     CHECK_MAX_NUMBER("3", "Найдите максимальный номер",
-            () -> ManagerStruct.defineMaxNumber()),
+            ManagerStruct::defineMaxNumber),
     PAINT_STARS("4", "Нарисуте заданное колличество звезд",
-            () -> ManagerStruct.printStars()),
+            ManagerStruct::printStars),
     CALCULATE_DIRECT("5", "Расчитайте расположение по направлению",
-            () -> ManagerStruct.directionPlayer()),
+            ManagerStruct::directionPlayer),
     DEFINE_NEGATIVE("6", "Определите является ли номер негативным",
-            () -> ManagerStruct.defineNumberIsNegative()),
+            ManagerStruct::defineNumberIsNegative),
     SUM_ODD_NUMBER("7", "Посчитайте сумму всех нечетных номеров до",
-            () -> ManagerStruct.sumAllNotEvenNumber()),
+            ManagerStruct::sumAllNotEvenNumber),
     MULTIPLY_EVEN_NUMBER("8", "Посчитайте произведение всех четных цифр до номер",
-            () -> ManagerStruct.multiplyOddUpTo())
+            ManagerStruct::multiplyOddUpTo),
+    SUM_EVEN_NUMBER("9", "Сумма всех четных числе до номера",
+            ManagerStruct::sumEvenNumber)
     ;
 
-    public void execute() {
-        action.run();
+    public void execute(ManagerStruct managerStruct) {
+        action.accept(managerStruct);
     };
 
     private final String code;
     private final String description;
-    private final Runnable action;
+    private final Consumer action;
 
-    ManageOptions(String code, String description, Runnable action) {
+    ManageOptions(String code, String description, Consumer<ManagerStruct> action) {
         this.code = code;
         this.description = description;
         this.action = action;
@@ -41,12 +43,9 @@ public enum ManageOptions {
     public String getCode() {return code;}
     public String getDescription() {return description;}
 
-    public static ManageOptions fromCode(String code, PrintStream out){
+    public static ManageOptions fromCode(String code){
         for (ManageOptions options : values()) {
-            if (options.code.equals(code)) {
-                out.printf("You choose: %s - %s%n", options.code, options.description);
-                return options;
-            }
+            if (options.code.equals(code)) return options;
         }
         return null;
     }

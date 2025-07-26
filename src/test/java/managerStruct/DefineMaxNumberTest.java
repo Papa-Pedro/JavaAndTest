@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 public class DefineMaxNumberTest extends BaseManageStructTest {
     private ByteArrayInputStream inputStream;
@@ -23,7 +24,9 @@ public class DefineMaxNumberTest extends BaseManageStructTest {
     public void positiveTest(String userData, String result){
         inputStream = new ByteArrayInputStream((userData + "\n").getBytes());
         System.setIn(inputStream);
-        ManagerStruct.defineMaxNumber();
+        // Создаём экземляр с инфраструктурой ввода/вывода
+        ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
+        managerStruct.defineMaxNumber();
         String output = outputStream.toString().trim();
         Assert.assertEquals(output, result, "Проверка на валидный поиск max и min");
     }

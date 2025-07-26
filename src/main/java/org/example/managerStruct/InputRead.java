@@ -2,6 +2,7 @@ package org.example.managerStruct;
 
 import resourse.Trio;
 
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -9,11 +10,19 @@ import java.util.Scanner;
 
 //класс финальный что бы его не использовали как родителя
 public final class InputRead {
-    //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
-    private InputRead(){}
 
-    public static int readInt() {
-        Scanner scanner = new Scanner(System.in);
+    //private final Scanner scanner;
+    //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
+//    private InputRead(Scanner scanner){
+//        this.scanner = scanner;
+//    }
+//
+//    public static InputRead of(Scanner scanner) {
+//        return new InputRead(scanner);
+//    }
+
+    public static int readInt(Scanner scanner) {
+        scanner = new Scanner(System.in);
         if (scanner.hasNextLine()) {
             try {
                 return Integer.parseInt(scanner.nextLine());
