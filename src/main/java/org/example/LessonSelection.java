@@ -1,8 +1,6 @@
 package org.example;
 
-import org.example.managerStruct.InputRead;
-import org.example.managerStruct.ManagerStruct;
-import resourse.LessonOptions;
+import resourse.chouseEnum.LessonOptions;
 
 import java.io.PrintStream;
 import java.util.Scanner;

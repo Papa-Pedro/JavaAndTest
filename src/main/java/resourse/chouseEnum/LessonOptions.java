@@ -1,4 +1,4 @@
-package resourse;
+package resourse.chouseEnum;
 
 import org.example.Basis;
 import org.example.Operators;

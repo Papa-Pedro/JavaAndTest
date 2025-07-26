@@ -2,6 +2,7 @@ package org.example.managerStruct;
 
 import resourse.Pair;
 import resourse.Trio;
+import resourse.chouseEnum.ManageOptions;
 
 import java.io.PrintStream;
 import java.util.*;
@@ -18,31 +19,20 @@ public class ManagerStruct {
 
     //Точка входа, вызывается из Main
     public void chooseIssue() {
-        System.out.println("""
-                It's chapter about operators
-                Choose issue:
-                1 - notEvenAndSeven
-                2 - evenAndSix
-                3 - maxAmong
-                4 - stars 
-                5 - direction player inside square
-                6 - Number is negative
-                7 - Sum all not even number unit the number
-                8 - Multiply all not even number unit the number""");
-        //Словарь «код → действие»
-        String key = scanner.nextLine().trim();
-        Map<String, Runnable> command = Map.of(
-                "1", ManagerStruct::defineNotEvenAndSeven,
-                "2", ManagerStruct::defineEvenAndSix,
-                "3", ManagerStruct::defineMaxNumber,
-                "4", ManagerStruct::printStars,
-                "5", ManagerStruct::directionPlayer,
-                "6", ManagerStruct::defineNumberIsNegative,
-                "7", ManagerStruct::sumAllNotEvenNumber,
-                "8", ManagerStruct::multiplyOddUpTo
-        );
-        // Запускаем нужное действие или ругаемся
-        command.getOrDefault(key, () -> System.out.println("Wrong symbol")).run();
+        //Выводи все перечисленный пункты из Enum с помощью перебора.
+        for (ManageOptions options : ManageOptions.values()) {
+            out.printf("%s - %s%n", options.getCode(), options.getDescription());
+        }
+        out.println("Choose your item");
+        //Ждем выбора пункта
+        String input = scanner.nextLine().trim();
+        ManageOptions options = ManageOptions.fromCode(input, out);
+
+        if (options == null) {
+            out.println("Невернный ввод: " + input);
+        } else {
+            options.execute();
+        }
     }
 
     /**
