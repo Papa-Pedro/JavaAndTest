@@ -24,7 +24,6 @@ public final class CalculateManagerStruct {
         return result;
     }
 
-
     public static String calculateDefineNumberIsNegative(int number) {
         String result = "";
         //Integer.signum(n) возвращает знак числа

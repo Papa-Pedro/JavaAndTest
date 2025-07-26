@@ -3,11 +3,6 @@ package org.example;
 import java.util.Scanner;
 
 public class Operators {
-/*
-    public String name = "";
-    public final String secondName = "Charlton";
-    public static String profession = "engineer";
-*/
 
     {
        System.out.println("""
