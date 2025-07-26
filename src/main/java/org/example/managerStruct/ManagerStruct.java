@@ -38,6 +38,12 @@ public class ManagerStruct {
         }
     }
 
+    public void hiddenWord(){
+        String message = InputRead.readString(scanner);
+        StringBuilder result = CalculateManagerStruct.hiddenWord(message.length());
+        out.println(result);
+    }
+
     public void sumEvenNumber(){
         int n = InputRead.readInt(scanner);
         if (n % 2 != 0) throw new IllegalArgumentException("Введенное число не четное");

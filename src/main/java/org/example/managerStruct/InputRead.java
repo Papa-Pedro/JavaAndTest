@@ -2,7 +2,6 @@ package org.example.managerStruct;
 
 import resourse.Trio;
 
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -12,13 +11,21 @@ import java.util.Scanner;
 public final class InputRead {
 
     public static int readInt(Scanner scanner) {
-        scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()) {
+        //scanner = new Scanner(System.in);
+        if (scanner.hasNextLine() ) {
             try {
                 return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Введенная строка должена быть числом");
             }
+        } else throw new NoSuchElementException("Нет доступных строк для чтения");
+    }
+
+    public static String readString(Scanner scanner) {
+        if (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.isEmpty()) throw new NoSuchElementException("Нет доступных строк для чтения");
+            return line;
         } else throw new NoSuchElementException("Нет доступных строк для чтения");
     }
 

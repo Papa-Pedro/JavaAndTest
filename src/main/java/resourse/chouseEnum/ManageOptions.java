@@ -23,7 +23,9 @@ public enum ManageOptions {
     MULTIPLY_EVEN_NUMBER("8", "Посчитайте произведение всех четных цифр до номер",
             ManagerStruct::multiplyOddUpTo),
     SUM_EVEN_NUMBER("9", "Сумма всех четных числе до номера",
-            ManagerStruct::sumEvenNumber)
+            ManagerStruct::sumEvenNumber),
+    HIDDEN_WORD("10", "Скрыть слово за звездочками",
+            ManagerStruct::hiddenWord)
     ;
 
     public void execute(ManagerStruct managerStruct) {

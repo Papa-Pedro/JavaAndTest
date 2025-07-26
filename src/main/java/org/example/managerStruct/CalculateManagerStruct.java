@@ -3,10 +3,16 @@ package org.example.managerStruct;
 import resourse.Pair;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public final class CalculateManagerStruct {
     //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
     private CalculateManagerStruct(){}
+
+    public static StringBuilder hiddenWord(int length) {
+        return new StringBuilder()
+                .append("*".repeat(length));
+    }
 
     public static int calculateSumEvenNumber(int number) {
         return (int) (Math.pow(number, 2) / 4 + number / 2);

@@ -1,9 +1,12 @@
 package org.example;
 
-import org.example.managerStruct.ManagerStruct;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -14,5 +17,6 @@ public class Main {
         LessonSelection service = new LessonSelection(scanner, outStream);
         //запускаем прогу
         service.run();
+
     }
 }
