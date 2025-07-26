@@ -84,7 +84,6 @@ public class ManagerStruct {
             throw new IllegalArgumentException("Первые два элемента должны быть числом");
         }
         String direction = input.third();
-        //В случае если направление не важно выводим другую ошибку
         Pair pair = CalculateManagerStruct.calculateDirectionPlayer(x, y , direction);
         System.out.println(String.format(
                 "x: %d, y: %d, direction: %s",
@@ -103,10 +102,10 @@ public class ManagerStruct {
      */
     public static void defineMaxNumber() {
         int[] arrayOfX = InputRead.readInputArray();//readInputArray();
-        int max = Arrays.stream(arrayOfX).max().orElseThrow();
+       /* int max = Arrays.stream(arrayOfX).max().orElseThrow();
         int min = Arrays.stream(arrayOfX).min().orElseThrow();
-        String result = String.format("минимальное: %d, максимальное: %d", min, max);
-        System.out.println(result);
+        String result = String.format("минимальное: %d, максимальное: %d", min, max);*/
+        System.out.println(CalculateManagerStruct.calculateDefineMaxNumber(arrayOfX));
     }
 
     public static void defineEvenAndSix(){

@@ -2,6 +2,8 @@ package org.example.managerStruct;
 
 import resourse.Pair;
 
+import java.util.Arrays;
+
 public final class CalculateManagerStruct {
     //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
     private CalculateManagerStruct(){}
@@ -46,14 +48,12 @@ public final class CalculateManagerStruct {
         };
     }
 
-/*
-    public static String calculate (int number) {}
 
-    public static String calculate (int number) {}
-
-    public static String calculate (int number) {}
-
-    public static String calculate (int number) {}
-
-     */
+    public static String calculateDefineMaxNumber (int[] arrayOfX) {
+        String result;
+        int max = Arrays.stream(arrayOfX).max().orElseThrow();
+        int min = Arrays.stream(arrayOfX).min().orElseThrow();
+        result = String.format("минимальное: %d, максимальное: %d", min, max);
+        return result;
+    }
 }
