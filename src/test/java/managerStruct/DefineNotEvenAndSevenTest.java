@@ -10,8 +10,6 @@ import java.util.Scanner;
 
 public class DefineNotEvenAndSevenTest extends BaseManageStructTest {
 
-    private ByteArrayInputStream inputStream;
-
     @DataProvider(name = "validData")
     private Object[][] provideValidData() {
         return new Object[][] {
@@ -29,7 +27,7 @@ public class DefineNotEvenAndSevenTest extends BaseManageStructTest {
         // Создаём экземляр с инфраструктурой ввода/вывода
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.defineNotEvenAndSeven();
-        Boolean output = Boolean.valueOf(outputStream.toString().trim());
+        Boolean output = Boolean.valueOf(fakeOutStream.toString().trim());
         Assert.assertEquals(output, result, "Проверка на валдных значениях");
     }
 

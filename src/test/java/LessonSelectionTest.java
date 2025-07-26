@@ -26,7 +26,7 @@ public class LessonSelectionTest extends BaseManageStructTest{
         // 1. Подделываем ввод: пользователь выбрал "1"
         fakeScanner = new Scanner(inputStream);
         // 3. Создаём реальный сервис с подделками
-        LessonSelection selection = new LessonSelection(fakeScanner, new PrintStream(outputStream));
+        LessonSelection selection = new LessonSelection(fakeScanner, new PrintStream(fakeOutStream));
         //подменяем конструктор Basic(Scanner, PrintStream)
         try (MockedConstruction<Basis> mockedConstruction =
                 mockConstruction(Basis.class, (mockBasis, context) -> {
@@ -35,7 +35,7 @@ public class LessonSelectionTest extends BaseManageStructTest{
                 })){
             //запускаем код
             selection.run();
-            String output = outputStream.toString().trim();
+            String output = fakeOutStream.toString().trim();
             assertTrue("Wrong tittle", output.contains("Choose lesson from stepic"));
             assertTrue(output.contains("1 - Basis"));
             Basis create = mockedConstruction.constructed().get(0);
@@ -50,14 +50,14 @@ public class LessonSelectionTest extends BaseManageStructTest{
         //create fake scanner and put prepare string (inputStream)
         fakeScanner = new Scanner(inputStream);
         //create object when called class
-        LessonSelection selection = new LessonSelection(fakeScanner, new PrintStream(outputStream));
+        LessonSelection selection = new LessonSelection(fakeScanner, new PrintStream(fakeOutStream));
 
         try (MockedConstruction<Operators> mockedConstruction =
                 mockConstruction(Operators.class, (mockOperation, context) -> {
                     doNothing().when(mockOperation).chooseIssue();
                 })) {
             selection.run();
-            String output = outputStream.toString().trim();
+            String output = fakeOutStream.toString().trim();
             assertTrue("Wrong tittle", output.contains("Choose lesson from stepic"));
             assertTrue(output.contains("2 - Operators"));
 
@@ -70,7 +70,7 @@ public class LessonSelectionTest extends BaseManageStructTest{
     public void callManageStructTest() {
         inputStream = new ByteArrayInputStream("3\n0\n".getBytes());
         fakeScanner = new Scanner(inputStream);
-        LessonSelection selection = new LessonSelection(fakeScanner, new PrintStream(outputStream));
+        LessonSelection selection = new LessonSelection(fakeScanner, new PrintStream(fakeOutStream));
 
         try (MockedConstruction<ManagerStruct> mockedConstruction =
                 mockConstruction(ManagerStruct.class, (mockManageStruct, context) -> {

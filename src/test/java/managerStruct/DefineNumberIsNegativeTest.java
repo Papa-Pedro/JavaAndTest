@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 public class DefineNumberIsNegativeTest extends BaseManageStructTest {
 
-    private ByteArrayInputStream inputStream;
-
-
     @Test(dataProvider = "validInput", groups = "Positive")
     public void directTest(String inputData, String expectedResult) {
         inputStream = new ByteArrayInputStream((inputData + "\n").getBytes());
@@ -20,7 +17,7 @@ public class DefineNumberIsNegativeTest extends BaseManageStructTest {
         // Создаём экземляр с инфраструктурой ввода/вывода
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.defineNumberIsNegative();
-        String actualResult = outputStream.toString().trim();
+        String actualResult = fakeOutStream.toString().trim();
         Assert.assertEquals(
                 actualResult,
                 expectedResult,

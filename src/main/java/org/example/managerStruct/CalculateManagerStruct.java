@@ -9,7 +9,7 @@ public final class CalculateManagerStruct {
     private CalculateManagerStruct(){}
 
     public static int calculateSumEvenNumber(int number) {
-        return (int) (Math.pow(number, 2) / 4 + 2);
+        return (int) (Math.pow(number, 2) / 4 + number / 2);
     }
 
     public static int calculateMultiplyOddUpTo(int number) {

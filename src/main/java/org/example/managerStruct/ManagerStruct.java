@@ -40,6 +40,7 @@ public class ManagerStruct {
 
     public void sumEvenNumber(){
         int n = InputRead.readInt(scanner);
+        if (n % 2 != 0) throw new IllegalArgumentException("Введенное число не четное");
         int result = CalculateManagerStruct.calculateSumEvenNumber(n);
         out.println(result);
     }

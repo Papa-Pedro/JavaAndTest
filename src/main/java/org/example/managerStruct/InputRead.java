@@ -11,16 +11,6 @@ import java.util.Scanner;
 //класс финальный что бы его не использовали как родителя
 public final class InputRead {
 
-    //private final Scanner scanner;
-    //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
-//    private InputRead(Scanner scanner){
-//        this.scanner = scanner;
-//    }
-//
-//    public static InputRead of(Scanner scanner) {
-//        return new InputRead(scanner);
-//    }
-
     public static int readInt(Scanner scanner) {
         scanner = new Scanner(System.in);
         if (scanner.hasNextLine()) {

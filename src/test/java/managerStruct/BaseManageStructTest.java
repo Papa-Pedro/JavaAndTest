@@ -12,13 +12,13 @@ public abstract class BaseManageStructTest {
 
     protected final PrintStream originOutput = System.out;
     protected final InputStream originInput = System.in;
-    protected ByteArrayOutputStream outputStream;
+    protected ByteArrayOutputStream fakeOutStream;
     protected ByteArrayInputStream inputStream;
 
     @BeforeMethod(alwaysRun = true)
     public void setUpStream(){
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+        fakeOutStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(fakeOutStream));
     }
 
     @AfterMethod(alwaysRun = true)
