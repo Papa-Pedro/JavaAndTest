@@ -1,6 +1,12 @@
 # JavaAndTest
 
-Java‑проект для практики из курса: выбор уроков, запуск `LessonSelection` и тестирование `Basis`, `Operators`, `ManagerStruct` через TestNG и Mockito.
+Java‑проект для практики из курса, выбор уроков запуск и тестирование через TestNG и Mockito.
+
+Глава в курсе - пункт в проге:
+1) Выбор урока - `LessonSelection`  
+2) Основы    - `Basis`, 
+3) Операторы - `Operators`,
+4) Управлябщая структура - `ManagerStruct`
 
 Курс: Java Тренажер - https://stepik.org/course/182389/syllabus
 
