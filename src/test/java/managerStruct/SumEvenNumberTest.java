@@ -16,7 +16,7 @@ public class SumEvenNumberTest extends BaseManageStructTest {
         System.setIn(inputStream);
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.sumEvenNumber();
-        int actualResult = Integer.parseInt(fakeOutStream.toString().trim());
+        int actualResult = Integer.parseInt(outStream.toString().trim());
         Assert.assertEquals(
                 actualResult,
                 expectResult,

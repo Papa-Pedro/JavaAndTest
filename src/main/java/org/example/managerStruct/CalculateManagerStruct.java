@@ -3,29 +3,56 @@ package org.example.managerStruct;
 import resourse.Pair;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public final class CalculateManagerStruct {
     //для того что бы нельзя было создать экземпляр, все функции вызываются напрямую
     private CalculateManagerStruct(){}
 
-    public static StringBuilder hiddenWord(int length) {
-        return new StringBuilder()
-                .append("*".repeat(length));
+    /** Функции для вычислений */
+    /**
+     * Удваивает целое число, если оно положительное
+     * @param number - цисло для удвоение
+     * @return - удвоенное число или number
+     */
+    public static int doubleIfPositive(int number) {
+        return Integer.signum(number) == 1
+                ? number * 2
+                : number;
     }
 
-    public static int calculateSumEvenNumber(int number) {
-        return (int) (Math.pow(number, 2) / 4 + number / 2);
+    /**
+     * Возвращает маску строку из * заданной длинной
+     * @param length - длинна введенного слова
+     * @return строка из *
+     */
+    public static String hiddenWord(int length) {
+        return "*".repeat(length);
     }
 
-    public static int calculateMultiplyOddUpTo(int number) {
-       // System.out.println(number);
-        int result = 1;
-        for (int i = (number % 2 == 0) ? --number: number; i > 0; i -= 2) result *= i;
-        return  result;
+    /**
+     * Возвращает сумму всех чётных чисел от 2 до number (включительно).
+     * Предполагается, что number ≥ 0 и чётно.
+     */
+    public static int sumEvenUpTo(int number) {
+        int half = number / 2;
+        return half * (half - 1);
     }
 
-    public static int calculateSumAllNotEvenNumber(int number) {
+    /**
+     * Произведение всех нечетных чисел до выбранного числа
+     * @param number выбранное число
+     * @return произведение
+     */
+    public static int productOddUpTo(int number) {
+        int product = 1;
+        int lastOdd = (number % 2 == 0) ? number - 1 : number;
+        for (int i = lastOdd; i > 0; i -= 2) {
+            product *= i;
+        }
+        return  product;
+    }
+
+    public static int sumOddUpTo(int number) {
         int result = 0;
         while (number > 0) {
             result += number;
@@ -34,7 +61,7 @@ public final class CalculateManagerStruct {
         return result;
     }
 
-    public static String calculateDefineNumberIsNegative(int number) {
+    public static String signDescription(int number) {
         String result = "";
         //Integer.signum(n) возвращает знак числа
         result = switch (Integer.signum(number)) {
@@ -46,7 +73,7 @@ public final class CalculateManagerStruct {
         return result;
     }
 
-    public static Pair calculateDirectionPlayer (int x, int y, String direction) {
+    public static Pair<Integer, Integer> calculateDirectionPlayer (int x, int y, String direction) {
         //В случае если направление не важно выводим другую ошибку
         return switch (direction) {
             case "up"    -> new Pair(x, y > 0   ? y - 1 : y);
@@ -56,7 +83,6 @@ public final class CalculateManagerStruct {
             default -> throw new IllegalArgumentException("Направление может быть только ud, down, left или right а не " + direction);
         };
     }
-
 
     public static String calculateDefineMaxNumber (int[] arrayOfX) {
         String result;

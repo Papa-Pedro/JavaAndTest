@@ -16,7 +16,7 @@ public class HiddenWordTest extends BaseManageStructTest {
         System.setIn(inputStream);
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.hiddenWord();
-        String actualResult = fakeOutStream.toString().trim();
+        String actualResult = outStream.toString().trim();
         Assert.assertEquals(
                 actualResult,
                 expectResult,

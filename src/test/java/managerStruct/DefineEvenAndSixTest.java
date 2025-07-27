@@ -27,7 +27,7 @@ public class DefineEvenAndSixTest extends BaseManageStructTest {
         // Создаём экземляр с инфраструктурой ввода/вывода
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.defineEvenAndSix();
-        Boolean output = Boolean.valueOf(fakeOutStream.toString().trim());
+        Boolean output = Boolean.valueOf(outStream.toString().trim());
         System.out.println("TestNG version: " + org.testng.Assert.class.getPackage().getImplementationVersion());
         Assert.assertEquals(output, result, "Проверка на валдных значениях");
     }

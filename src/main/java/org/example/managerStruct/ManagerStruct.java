@@ -38,16 +38,23 @@ public class ManagerStruct {
         }
     }
 
+    //Функции для работы с выбранном заданием
     public void hiddenWord(){
         String message = InputRead.readString(scanner);
-        StringBuilder result = CalculateManagerStruct.hiddenWord(message.length());
+        String result = CalculateManagerStruct.hiddenWord(message.length());
+        out.println(result);
+    }
+
+    public void multiplyPositiveNumber() {
+        int n = InputRead.readInt(scanner);
+        int result = CalculateManagerStruct.doubleIfPositive(n);
         out.println(result);
     }
 
     public void sumEvenNumber(){
         int n = InputRead.readInt(scanner);
         if (n % 2 != 0) throw new IllegalArgumentException("Введенное число не четное");
-        int result = CalculateManagerStruct.calculateSumEvenNumber(n);
+        int result = CalculateManagerStruct.sumEvenUpTo(n);
         out.println(result);
     }
 
@@ -59,7 +66,7 @@ public class ManagerStruct {
     public void multiplyOddUpTo(){
         int n = InputRead.readInt(scanner);
         if (n < 1) throw new IllegalArgumentException("Число для удовлетворения условий должно быть больше 1");
-        System.out.println(CalculateManagerStruct.calculateMultiplyOddUpTo(n));
+        System.out.println(CalculateManagerStruct.productOddUpTo(n));
     }
 
     /**
@@ -69,7 +76,7 @@ public class ManagerStruct {
     public void sumAllNotEvenNumber(){
         int n = InputRead.readInt(scanner);
         if (n % 2 == 0) throw new IllegalArgumentException("Введенная переменная должна быть четной");
-        System.out.println(CalculateManagerStruct.calculateSumAllNotEvenNumber(n));
+        System.out.println(CalculateManagerStruct.sumOddUpTo(n));
     }
 
     /**
@@ -81,7 +88,7 @@ public class ManagerStruct {
      */
     public void defineNumberIsNegative(){
         int n = InputRead.readInt(scanner);
-        System.out.println(CalculateManagerStruct.calculateDefineNumberIsNegative(n));
+        System.out.println(CalculateManagerStruct.signDescription(n));
     }
 
     public void directionPlayer(){

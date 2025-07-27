@@ -25,7 +25,9 @@ public enum ManageOptions {
     SUM_EVEN_NUMBER("9", "Сумма всех четных числе до номера",
             ManagerStruct::sumEvenNumber),
     HIDDEN_WORD("10", "Скрыть слово за звездочками",
-            ManagerStruct::hiddenWord)
+            ManagerStruct::hiddenWord),
+    MULTIPLY_ON_TWO("11", "Умножить положительное число на два",
+            ManagerStruct::multiplyPositiveNumber)
     ;
 
     public void execute(ManagerStruct managerStruct) {

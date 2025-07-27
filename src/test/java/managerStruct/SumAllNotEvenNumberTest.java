@@ -17,7 +17,7 @@ public class SumAllNotEvenNumberTest extends BaseManageStructTest {
         // Создаём экземляр с инфраструктурой ввода/вывода
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.sumAllNotEvenNumber();
-        String actualResult = fakeOutStream.toString().trim();
+        String actualResult = outStream.toString().trim();
         Assert.assertEquals(
                 actualResult,
                 expectResult,

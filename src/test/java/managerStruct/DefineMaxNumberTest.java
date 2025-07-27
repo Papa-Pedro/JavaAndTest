@@ -26,7 +26,7 @@ public class DefineMaxNumberTest extends BaseManageStructTest {
         // Создаём экземляр с инфраструктурой ввода/вывода
         ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
         managerStruct.defineMaxNumber();
-        String output = fakeOutStream.toString().trim();
+        String output = outStream.toString().trim();
         Assert.assertEquals(output, result, "Проверка на валидный поиск max и min");
     }
 
