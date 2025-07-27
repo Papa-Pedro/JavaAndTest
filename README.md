@@ -6,11 +6,11 @@ Java‑проект для практики из курса: выбор урок
 
 ## 🚀 Что внутри
 
-- `src/main/java/` — основной код:
-    - `LessonSelection.java` — класс запуска меню и выбора урока
-    - `LessonOptions` (enum) — отвечает за `Basis`, `Operators`, `ManagerStruct`
-    - `Basis.java`, `Operators.java`, `ManagerStruct.java` — логика каждой опции
-- `src/test/java/` — тесты:
+- `src/main/java/` - основной код:
+    - `LessonSelection.java` - класс запуска меню и выбора урока
+    - `LessonOptions` (enum) - отвечает за `Basis`, `Operators`, `ManagerStruct`
+    - `Basis.java`, `Operators.java`, `ManagerStruct.java` - логика каждой опции
+- `src/test/java/` - тесты:
     - `LessonSelectionTest`, `MultiplyPositiveNumberTest` и другие
     - Используется TestNG и Mockito (включая `mockConstruction`, `mockStatic`, `mockito-inline`)
 
@@ -27,11 +27,11 @@ mvn clean install
 При запуске LessonSelection, пользователь видит меню:
 
 Choose lesson from stepic "Java Тренажер"
-1 — Basis
-2 — Operators
-3 — Manager structure
-0 — Exit
-Затем вводит номер — и запускается соответствующая логика. После выполнения метод возвращает управление в меню. Пункт 0 завершает цикл.
+1 - Basis
+2 - Operators
+3 - Manager structure
+0 - Exit
+Затем вводит номер - и запускается соответствующая логика. После выполнения метод возвращает управление в меню. Пункт 0 завершает цикл.
 
 ## 🧪 Тестирование
 
