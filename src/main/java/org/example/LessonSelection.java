@@ -22,7 +22,7 @@ public class LessonSelection {
     public void run() {
         boolean running = true;
         while (running) {
-            System.out.println("""
+            out.println("""
                 Choose lesson from stepic "Java Тренажер"
                 1 - Basis
                 2 - Operators

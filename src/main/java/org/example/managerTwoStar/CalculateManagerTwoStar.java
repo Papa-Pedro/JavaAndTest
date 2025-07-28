@@ -3,11 +3,24 @@ package org.example.managerTwoStar;
 public class CalculateManagerTwoStar {
 
     public static int amountOfViolation(int number){
-        int result = 0;
-        for (int i = 0; i <= number; i++) {
-            result += i;
+        double result = 1;
+
+        for (int i = 1; i <= number; i++) {
+            if (i % 2 == 0) {
+                result += 1.0 / factorial(i);
+            }
+            else {
+                result -= 1.0 / factorial(i);
+            }
         }
-        return result - number;
+        result *= factorial(number);
+        return (int) Math.round(result);
+    }
+
+    private static int factorial(int n) {
+        int result = 1;
+        for (int i = 1; i <= n; i++) result *= i;
+        return result;
     }
 
 }

@@ -37,12 +37,16 @@ public class ManagerTwo {
      * нужно определить колличество перестановок n
      * минус один
      */
-    public void fake() {
-        int n = InputRead.readInt(scanner, out);
-        //n! - n
-        //1 2 3  4  5
-        //1 3 6 10 15
-        //0 1 3  6 10
+    public void mixUpHats() {
+        int n;
+        while (true) {
+            try {
+                n = LessonException.positiveInput(scanner, out);
+                break;
+            } catch (IllegalArgumentException e) {
+                out.println("Number must been more one");
+            }
+        }
         int result = CalculateManagerTwoStar.amountOfViolation(n);
         out.println(result);
     }

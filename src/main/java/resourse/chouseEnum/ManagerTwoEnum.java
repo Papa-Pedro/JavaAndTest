@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public enum ManagerTwoEnum {
 
-    FAKE(0, "fake", ManagerTwo::fake);
+    MIX_UP_HATS(1, "How many ways can you mix up the hats?", ManagerTwo::mixUpHats);
 
     public void execute(ManagerTwo managerTwo) {
         action.accept(managerTwo);

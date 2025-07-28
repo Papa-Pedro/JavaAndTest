@@ -50,7 +50,6 @@ public class Operators {
             case "13" -> defineGroupAge();
             default -> System.out.println("Yor input wrong symbol");
         }
-        scanner.close();
     }
 
     /**
