@@ -1,5 +1,6 @@
 package managerStruct;
 
+import baseTest.BaseTest;
 import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -8,10 +9,10 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-import static org.example.manager.InputRead.parseStringStrict;
+import static org.example.InputRead.parseStringStrict;
 import static org.testng.Assert.assertThrows;
 
-public class HiddenWordTest extends BaseManageStructTest {
+public class HiddenWordTest extends BaseTest {
 
     @Test(dataProvider = "validData", groups = "positive")
     public void hiddenTest(String number, String expectResult) {

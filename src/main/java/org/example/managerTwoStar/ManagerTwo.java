@@ -1,6 +1,6 @@
 package org.example.managerTwoStar;
 
-import org.example.manager.InputRead;
+import org.example.InputRead;
 import resourse.chouseEnum.ManagerTwoEnum;
 
 import java.io.PrintStream;
@@ -23,11 +23,27 @@ public class ManagerTwo {
         out.println("Choose your item");
 
         int input = InputRead.readInt(scanner, out);
-        ManagerTwoEnum managerEnum = ManagerTwoEnum.fromCode(input);
-        /** ToDO */
+        ManagerTwoEnum options = ManagerTwoEnum.fromCode(input);
+
+        if (options == null) {
+            out.println("Невернный ввод: " + input);
+        } else {
+            options.execute(this);
+        }
     }
 
+    /**
+     * На вход подается n,
+     * нужно определить колличество перестановок n
+     * минус один
+     */
     public void fake() {
-
+        int n = InputRead.readInt(scanner, out);
+        //n! - n
+        //1 2 3  4  5
+        //1 3 6 10 15
+        //0 1 3  6 10
+        int result = CalculateManagerTwoStar.amountOfViolation(n);
+        out.println(result);
     }
 }

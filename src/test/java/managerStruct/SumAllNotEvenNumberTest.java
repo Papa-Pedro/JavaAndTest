@@ -1,5 +1,6 @@
 package managerStruct;
 
+import baseTest.BaseTest;
 import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-public class SumAllNotEvenNumberTest extends BaseManageStructTest {
+public class SumAllNotEvenNumberTest extends BaseTest {
 
     @Test(dataProvider = "validData", groups = "positive")
     public void directCheck(String inputData, String expectResult) {

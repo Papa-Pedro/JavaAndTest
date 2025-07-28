@@ -1,5 +1,6 @@
 package org.example.manager;
 
+import org.example.InputRead;
 import resourse.Pair;
 import resourse.Trio;
 import resourse.chouseEnum.ManagerEnum;

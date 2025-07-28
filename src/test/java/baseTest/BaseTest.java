@@ -1,4 +1,4 @@
-package managerStruct;
+package baseTest;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-public abstract class BaseManageStructTest {
+public class BaseTest {
 
     protected final PrintStream originOutput = System.out;
     protected final InputStream originInput = System.in;

@@ -1,17 +1,17 @@
 package managerStruct;
 
+import baseTest.BaseTest;
 import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import static org.example.manager.InputRead.readTrioString;
+import static org.example.InputRead.readTrioString;
 
-public class DirectionPlayerTest extends BaseManageStructTest {
+public class DirectionPlayerTest extends BaseTest {
 
     @Test(dataProvider = "validData")
     public void validTest_insideSquare(String inputData, String resultFun, String context){

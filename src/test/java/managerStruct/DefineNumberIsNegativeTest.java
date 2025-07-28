@@ -1,5 +1,6 @@
 package managerStruct;
 
+import baseTest.BaseTest;
 import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-public class DefineNumberIsNegativeTest extends BaseManageStructTest {
+public class DefineNumberIsNegativeTest extends BaseTest {
 
     @Test(dataProvider = "validInput", groups = "Positive")
     public void directTest(String inputData, String expectedResult) {

@@ -8,6 +8,10 @@ public enum ManagerTwoEnum {
 
     FAKE(0, "fake", ManagerTwo::fake);
 
+    public void execute(ManagerTwo managerTwo) {
+        action.accept(managerTwo);
+    }
+
     private final int    code;
     private final String description;
     private final Consumer action;

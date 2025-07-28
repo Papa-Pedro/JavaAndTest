@@ -1,4 +1,3 @@
-import managerStruct.BaseManageStructTest;
 import org.example.*;
 
 import org.example.manager.ManagerStruct;
@@ -15,7 +14,7 @@ import java.util.Scanner;
 import static org.mockito.Mockito.*;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class LessonSelectionTest extends BaseManageStructTest{
+public class LessonSelectionTest {
 
     protected Scanner fakeScanner;
 
