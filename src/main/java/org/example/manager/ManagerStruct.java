@@ -1,8 +1,8 @@
-package org.example.managerStruct;
+package org.example.manager;
 
 import resourse.Pair;
 import resourse.Trio;
-import resourse.chouseEnum.ManageOptions;
+import resourse.chouseEnum.ManagerEnum;
 
 import java.io.PrintStream;
 import java.util.*;
@@ -21,14 +21,13 @@ public class ManagerStruct {
     //Точка входа, вызывается из Main
     public void chooseIssue() {
         //Выводи все перечисленный пункты из Enum с помощью перебора.
-        for (ManageOptions options : ManageOptions.values()) {
+        for (ManagerEnum options : ManagerEnum.values()) {
             out.printf("%s - %s%n", options.getCode(), options.getDescription());
         }
         out.println("Choose your item");
         //Ждем выбора пункта
-
         String input = scanner.nextLine().trim();
-        ManageOptions options = ManageOptions.fromCode(input);
+        ManagerEnum options = ManagerEnum.fromCode(input);
 
         if (options == null) {
             out.println("Невернный ввод: " + input);
@@ -39,6 +38,7 @@ public class ManagerStruct {
     }
 
     //Функции для работы с выбранном заданием
+
     public void hiddenWord(){
         String message = InputRead.readString(scanner);
         String result = CalculateManagerStruct.hiddenWord(message.length());
@@ -46,13 +46,13 @@ public class ManagerStruct {
     }
 
     public void multiplyPositiveNumber() {
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         int result = CalculateManagerStruct.doubleIfPositive(n);
         out.println(result);
     }
 
     public void sumEvenNumber(){
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         if (n % 2 != 0) throw new IllegalArgumentException("Введенное число не четное");
         int result = CalculateManagerStruct.sumEvenUpTo(n);
         out.println(result);
@@ -64,7 +64,7 @@ public class ManagerStruct {
      * @throws InterruptedException если n < 1
      */
     public void multiplyOddUpTo(){
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         if (n < 1) throw new IllegalArgumentException("Число для удовлетворения условий должно быть больше 1");
         System.out.println(CalculateManagerStruct.productOddUpTo(n));
     }
@@ -74,7 +74,7 @@ public class ManagerStruct {
      * until the number n, it has not even.
      */
     public void sumAllNotEvenNumber(){
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         if (n % 2 == 0) throw new IllegalArgumentException("Введенная переменная должна быть четной");
         System.out.println(CalculateManagerStruct.sumOddUpTo(n));
     }
@@ -87,7 +87,7 @@ public class ManagerStruct {
      * result it's variable which print
      */
     public void defineNumberIsNegative(){
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         System.out.println(CalculateManagerStruct.signDescription(n));
     }
 
@@ -111,7 +111,7 @@ public class ManagerStruct {
     }
 
     public void printStars(){
-        int amount = InputRead.readInt(scanner);
+        int amount = InputRead.readInt(scanner, out);
         String result = "★".repeat(amount);
         System.out.println(result);
     }
@@ -129,13 +129,13 @@ public class ManagerStruct {
     }
 
     public void defineEvenAndSix(){
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         boolean result = (n % 2 == 0 && n % 6 == 0);
         System.out.println(result);
     }
 
     public void defineNotEvenAndSeven(){
-        int n = InputRead.readInt(scanner);
+        int n = InputRead.readInt(scanner, out);
         boolean result = (n % 2 != 0 && n % 7 == 0);
         System.out.println(result);
     }

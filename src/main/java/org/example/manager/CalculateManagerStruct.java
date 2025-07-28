@@ -1,4 +1,4 @@
-package org.example.managerStruct;
+package org.example.manager;
 
 import resourse.Pair;
 
@@ -35,7 +35,7 @@ public final class CalculateManagerStruct {
      */
     public static int sumEvenUpTo(int number) {
         int half = number / 2;
-        return half * (half - 1);
+        return half * (half - 1) + number;
     }
 
     /**

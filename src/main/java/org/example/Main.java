@@ -2,10 +2,7 @@ package org.example;
 
 
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class Main {
@@ -17,6 +14,8 @@ public class Main {
         LessonSelection service = new LessonSelection(scanner, outStream);
         //запускаем прогу
         service.run();
+
+        scanner.close();
 
     }
 }

@@ -1,6 +1,6 @@
 package managerStruct;
 
-import org.example.managerStruct.ManagerStruct;
+import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,21 +25,21 @@ public class SumEvenNumberTest extends BaseManageStructTest {
     }
 
     @Test(dataProvider = "negativeData", groups = "negative")
-    public void wrongInput(String input, String message) {
+    public void wrongInput(String input, String expectedResult) {
         inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
         try {
             ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
             managerStruct.sumEvenNumber();
-            Assert.fail("Ожидалось что тест упадет с " + message);
+            Assert.fail("Ожидалось что тест упадет с " + input);
         } catch (Throwable e) {
             String actualException = e.getClass().getSimpleName();
-            String expectException = "IllegalArgumentException";
+            String expectException = expectedResult;
             Assert.assertEquals(
                     actualException,
                     expectException,
                     String.format("Ожидалось что с \"%s\" мы получим исключени %s. " +
-                            "Получили %s c текстом \"%s\"", message, expectException, actualException, e.getMessage())
+                            "Получили %s c текстом \"%s\"", input, expectException, actualException, e.getMessage())
             );
         }
     }
@@ -57,9 +57,9 @@ public class SumEvenNumberTest extends BaseManageStructTest {
     @DataProvider(name = "negativeData")
     private Object[][] provideWrongData() {
         return new Object[][] {
-                {"7",     "Input a even number"},
-                {"two", "Input a number"},
-                {"\n",  "Input empty string"}
+                {"7",   "IllegalArgumentException"},
+                {"two", "NoSuchElementException"},
+                {"\n",  "NoSuchElementException"}
         };
     }
 

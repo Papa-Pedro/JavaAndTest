@@ -1,10 +1,10 @@
 package resourse.chouseEnum;
 
-import org.example.managerStruct.ManagerStruct;
+import org.example.manager.ManagerStruct;
 
 import java.util.function.Consumer;
 
-public enum ManageOptions {
+public enum ManagerEnum {
 
     CHECK_ODD_AND_SEVEN("1", "Проверить нечётность и делимость на 7",
             ManagerStruct::defineNotEvenAndSeven),
@@ -38,7 +38,8 @@ public enum ManageOptions {
     private final String description;
     private final Consumer action;
 
-    ManageOptions(String code, String description, Consumer<ManagerStruct> action) {
+
+    ManagerEnum(String code, String description, Consumer<ManagerStruct> action) {
         this.code = code;
         this.description = description;
         this.action = action;
@@ -47,9 +48,9 @@ public enum ManageOptions {
     public String getCode() {return code;}
     public String getDescription() {return description;}
 
-    public static ManageOptions fromCode(String code){
-        for (ManageOptions options : values()) {
-            if (options.code.equals(code)) return options;
+    public static ManagerEnum fromCode(String code){
+        for (ManagerEnum option : values()) {
+            if (option.code.equals(code)) return option;
         }
         return null;
     }

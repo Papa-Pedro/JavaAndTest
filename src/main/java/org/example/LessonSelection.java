@@ -1,6 +1,6 @@
 package org.example;
 
-import resourse.chouseEnum.LessonOptions;
+import resourse.chouseEnum.LessonOptionsEnum;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -27,17 +27,19 @@ public class LessonSelection {
                 1 - Basis
                 2 - Operators
                 3 - Manager structure
+                4 - Manager structure two stars
                 0 - Exit""");
             String line = scanner.nextLine().trim();
 
-            LessonOptions opt = LessonOptions.from(line);
+            LessonOptionsEnum opt = LessonOptionsEnum.from(line);
             if (opt == null) {
                 out.println("Неправильный ввод");
-            } else if (opt == LessonOptions.EXIT) {
+            } else if (opt == LessonOptionsEnum.EXIT) {
                 running = false;
             } else {
                 opt.execute(scanner, out);
             }
         }
     }
+
 }

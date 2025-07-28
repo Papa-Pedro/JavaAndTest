@@ -2,12 +2,14 @@ package resourse.chouseEnum;
 
 import org.example.Basis;
 import org.example.Operators;
-import org.example.managerStruct.ManagerStruct;
+import org.example.manager.ManagerStruct;
+import org.example.managerTwoStar.ManagerTwo;
+//import org.example.managerTwoStar.ManagerTwo;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public enum LessonOptions {
+public enum LessonOptionsEnum {
 
     BASIS("1") {
         @Override
@@ -30,6 +32,13 @@ public enum LessonOptions {
             managerStruct.chooseIssue();
         }
     },
+    MANAGER_TWO("4") {
+        @Override
+        public void execute(Scanner scanner, PrintStream out) {
+            ManagerTwo managerTwo = new ManagerTwo(scanner, out);
+            managerTwo.chooseIssue();
+        }
+    },
     EXIT("0") {
         @Override
         public void execute(Scanner scanner, PrintStream out) {
@@ -41,11 +50,11 @@ public enum LessonOptions {
     public abstract void execute(Scanner scanner, PrintStream out);
     //Конструктор для передачи состояния нажатого кода
     private final String code;
-    LessonOptions(String code) { this.code = code;}
+    LessonOptionsEnum(String code) { this.code = code;}
 
     /** парсер из введённой строки → enum */
-    public static LessonOptions from(String input) {
-        for (LessonOptions opt : values()) {
+    public static LessonOptionsEnum from(String input) {
+        for (LessonOptionsEnum opt : values()) {
             if (opt.code.equals(input)) return opt;
         }
         return null;

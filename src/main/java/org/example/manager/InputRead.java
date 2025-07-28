@@ -1,7 +1,8 @@
-package org.example.managerStruct;
+package org.example.manager;
 
 import resourse.Trio;
 
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -10,15 +11,34 @@ import java.util.Scanner;
 //класс финальный что бы его не использовали как родителя
 public final class InputRead {
 
-    public static int readInt(Scanner scanner) {
-        //scanner = new Scanner(System.in);
-        if (scanner.hasNextLine() ) {
+
+    //-------------- CORE-LEVEL PARSERS (только парсинг + исключения) ---------
+    /**
+     * Пытается распарсить строку как int
+     * @throws NumberFormatException если строка нецелочисленная
+     */
+    public static int parseIntStrict(String line) {
+        return Integer.parseInt(line);
+    }
+
+    //-------------- UI-LEVEL PROMPTS (интерактив с пользователем) ---------
+    /**
+     * Интерактивно запрашивает число пока его не получит
+     * ловит NumberFormatException и переспрашивает, пока не будет валидно.
+     * @param scanner - для работы с stream input
+     * @return возвращает число
+     */
+    public static int readInt(Scanner scanner, PrintStream out) {
+        while (true) {
+            //Ушел от .hasNextLine(), в нашем случае она вылезет только если пользователь явно прибьет консоль
+            //Так же часто используется для чтения из файла
+            String line = scanner.nextLine().trim();
             try {
-                return Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Введенная строка должена быть числом");
+                return parseIntStrict(line);
+            } catch (Throwable e) {
+                out.printf("«%s» не число, повторите.%n", line);
             }
-        } else throw new NoSuchElementException("Нет доступных строк для чтения");
+        }
     }
 
     public static String readString(Scanner scanner) {

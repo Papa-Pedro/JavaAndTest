@@ -1,6 +1,6 @@
 package managerStruct;
 
-import org.example.managerStruct.ManagerStruct;
+import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

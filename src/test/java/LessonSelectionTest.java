@@ -1,7 +1,7 @@
 import managerStruct.BaseManageStructTest;
 import org.example.*;
 
-import org.example.managerStruct.ManagerStruct;
+import org.example.manager.ManagerStruct;
 import org.mockito.MockedConstruction;
 import static org.mockito.Mockito.mockConstruction;
 import static org.mockito.Mockito.doNothing;
