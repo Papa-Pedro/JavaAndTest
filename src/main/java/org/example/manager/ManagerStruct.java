@@ -39,8 +39,13 @@ public class ManagerStruct {
 
     //Функции для работы с выбранном заданием
 
+    /**
+     * Скрывает слово за звездочками
+     * Запрашивает строку
+     * На выходе строка в виде * в колличестве равном длине слова
+     */
     public void hiddenWord(){
-        String message = InputRead.readString(scanner);
+        String message = InputRead.readString(scanner, out);
         String result = CalculateManagerStruct.hiddenWord(message.length());
         out.println(result);
     }
@@ -93,7 +98,7 @@ public class ManagerStruct {
 
     public void directionPlayer(){
         //берем все три введенные символа в массиве
-        Trio<String, String, String> input = InputRead.readTrioString();
+        Trio<String, String, String> input = InputRead.readTrioString(scanner, out);
         //мы уверены что у нас не пустая строка и введено три символа
         //нам надо убедиться только что это числа
         int x, y;

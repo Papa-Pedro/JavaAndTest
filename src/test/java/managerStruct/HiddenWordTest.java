@@ -8,6 +8,9 @@ import org.testng.annotations.Test;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+import static org.example.manager.InputRead.parseStringStrict;
+import static org.testng.Assert.assertThrows;
+
 public class HiddenWordTest extends BaseManageStructTest {
 
     @Test(dataProvider = "validData", groups = "positive")
@@ -24,24 +27,30 @@ public class HiddenWordTest extends BaseManageStructTest {
         );
     }
 
-    @Test(dataProvider = "negativeData", groups = "negative")
-    public void emptyTest(String input, String message) {
-        inputStream = new ByteArrayInputStream(input.getBytes());
+    @Test(groups = "negative")
+    public void emptyTest() {
+        inputStream = new ByteArrayInputStream("".getBytes());
         System.setIn(inputStream);
+        String expectException = "NoSuchElementException";
         try {
             ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
             managerStruct.hiddenWord();
-            Assert.fail("Ожидалось что тест упадет с " + message);
+            Assert.fail("Ожидалось что тест упадет с " + expectException);
         } catch (Throwable e) {
             String actualException = e.getClass().getSimpleName();
-            String expectException = "NoSuchElementException";
             Assert.assertEquals(
                     actualException,
                     expectException,
-                    String.format("Ожидалось что с \"%s\" мы получим исключени %s. " +
-                            "Получили %s c текстом \"%s\"", message, expectException, actualException, e.getMessage())
+                    String.format("Ожидалось что мы получим исключени %s. " +
+                            "Получили %s c текстом \"%s\"", expectException, actualException, e.getMessage())
             );
         }
+    }
+
+    @Test(dataProvider = "negativeData", groups = "negative")
+    public void wrongInput(String input) {
+        assertThrows(IllegalArgumentException.class,
+                () -> parseStringStrict(input));
     }
 
     @DataProvider(name = "validData")
@@ -57,9 +66,9 @@ public class HiddenWordTest extends BaseManageStructTest {
     @DataProvider(name = "negativeData")
     private Object[][] provideWrongData() {
         return new Object[][] {
-                {"", "Input empty string"},
-                {"\n",  "Input empty string"}
+                {"\n"},
+                {"    "},
+                {"\n\n"}
         };
     }
-
 }

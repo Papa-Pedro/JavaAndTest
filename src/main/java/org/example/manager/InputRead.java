@@ -11,7 +11,6 @@ import java.util.Scanner;
 //класс финальный что бы его не использовали как родителя
 public final class InputRead {
 
-
     //-------------- CORE-LEVEL PARSERS (только парсинг + исключения) ---------
     /**
      * Пытается распарсить строку как int
@@ -21,10 +20,36 @@ public final class InputRead {
         return Integer.parseInt(line);
     }
 
+    /**
+     * Просто обёртка над scanner.nextLine()
+     * @exception NoSuchElementException - если строка совсем пустая
+     */
+    public static String readString(Scanner scanner) {
+        return scanner.nextLine();
+    }
+
+    /**
+     * Проверяем что строка не пустая
+     * @throw IllegalArgumentException - если строка пустая или состоит только из пробелов
+     */
+    public static String parseStringStrict(String line) {
+        if (line == null || line.trim().isEmpty() ) {
+            throw new IllegalArgumentException("Пустая строка не допустима");
+        }
+        return line;
+    }
+
+    /**
+     * Проверяем что столько "слов", сколько нам нужно переменных
+     */
+    public static void defineSize(String[] parts, int size) {
+        if (parts.length > size) throw new IllegalArgumentException();
+    }
+
     //-------------- UI-LEVEL PROMPTS (интерактив с пользователем) ---------
     /**
      * Интерактивно запрашивает число пока его не получит
-     * ловит NumberFormatException и переспрашивает, пока не будет валидно.
+     * ловит NoSuchElementException и переспрашивает, пока не будет валидно.
      * @param scanner - для работы с stream input
      * @return возвращает число
      */
@@ -41,34 +66,63 @@ public final class InputRead {
         }
     }
 
-    public static String readString(Scanner scanner) {
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (line.isEmpty()) throw new NoSuchElementException("Нет доступных строк для чтения");
-            return line;
-        } else throw new NoSuchElementException("Нет доступных строк для чтения");
+    /**
+     * Интерактивно запрашивает строку пока не получит ввод
+     * если строк несколько берет первую
+     * Ловит NoSuchElementException если поток ввода исчерпан (и пробрасывает дальше),
+     * - IllegalArgumentException от parseStringStrict,
+     * и в обоих случаях предлагает ввести дальше
+     * @param scanner - для работы с stream input
+     * @return возвращает строку
+     */
+    public static String readString(Scanner scanner, PrintStream out) {
+        while (true) {
+            String line;
+            try {
+                line = readString(scanner);
+            } catch (NoSuchElementException e) {
+                out.println("Ввод закончился, ожидалась строка");
+                throw e;
+            }
+
+            try {
+                return parseStringStrict(line);
+            } catch (IllegalArgumentException e) {
+                out.printf("«%s» — некорректная строка, повторите ввод.%n", line.trim());
+            }
+        }
     }
 
-    public static Trio readTrioString(){
-        Scanner scanner = new Scanner(System.in);
-        //trim() - удаляет лишние пробелы.
-        String line = scanner.nextLine().trim();
-        //isBlank() - проверяет строку на пустоту, если пустая бросается исключние
-        //Строки с одними пробелма, перводами строки и прочими символами isBlank тоже считает пустыми
-        if (line.isBlank()) {
-            throw new IllegalArgumentException("Нужно ввести три значения через пробел");
+    /**
+     * Ждем на вход три символа нужного типа, читаем эти символы как строки и записываем их в Trio
+     * @param scanner -  - для работы с stream input
+     * @return объект Trio
+     */
+    public static Trio readTrioString(Scanner scanner, PrintStream out){
+        String line; // = scanner.nextLine().trim();
+        while (true) {
+            //Проверка что строка вообще не пустая
+            try {
+                line = readString(scanner);
+            } catch (NoSuchElementException e) {
+                out.println("Ввод закончился, ожидалась строка");
+                throw e;
+            }
+            //Проверка что в строке есть символы
+            try {
+                line = parseStringStrict(line);
+            } catch (IllegalArgumentException e) {
+                out.printf("«%s» — некорректная строка, повторите ввод.%n", line.trim());
+            }
+            String[] parts = line.split("\\s+", 3);
+            //Проверка что колличество слов больше трех
+            try {
+                defineSize(parts, 3);
+                return new Trio(parts[0], parts[1], parts[2]);
+            } catch (IllegalArgumentException e) {
+                out.printf("Ожидалось 3 значения, а введено: " + parts.length);
+            }
         }
-        //Строка разибивает на массив из limit (3) строк, по символу \\s+ (один или множество пробелов)
-        //Таким образом мы можем ввести не только "100 0 up"
-        //но и "100     0    up", это все будет валидным
-        String[] parts = line.split("\\s+", 3);
-        //Если колличество элементов меньше трех, тогда бросаем исключение
-        if (parts.length < 3) {
-            throw new IllegalArgumentException(
-                    "Ожидалось 3 значения, а введено: " + parts.length
-            );
-        }
-        return new Trio<>(parts[0], parts[1], parts[2]);
     }
 
     public static int[] readInputArray(){

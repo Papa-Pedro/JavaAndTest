@@ -4,7 +4,12 @@ import org.example.manager.ManagerStruct;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static org.example.manager.InputRead.readTrioString;
 
 public class DirectionPlayerTest extends BaseManageStructTest {
 
@@ -21,23 +26,16 @@ public class DirectionPlayerTest extends BaseManageStructTest {
 
     @Test
     public void emptyInputTest() {
-        inputStream = new ByteArrayInputStream("\n".getBytes());
-        System.setIn(inputStream);
-        try {
-            // Создаём экземляр с инфраструктурой ввода/вывода
-            ManagerStruct managerStruct = new ManagerStruct(new Scanner(System.in), System.out);
-            managerStruct.directionPlayer();
-            Assert.fail("Ожидали IllegalArgumentException но ничего не пробросилось");
-        } catch (Throwable e) {
-            //compare exactly name of exception class
-            String actualName = e.getClass().getSimpleName();
-            String expectedName = "IllegalArgumentException";
-            Assert.assertEquals(
-                    actualName,
-                    expectedName,
-                    e.getMessage()
-            );
-        }
+
+        Scanner scanner = new Scanner(new ByteArrayInputStream("".getBytes()));
+        PrintStream fakeOut = new PrintStream(outStream);
+
+        Assert.expectThrows(NoSuchElementException.class,
+                () -> readTrioString(scanner, fakeOut));
+        Assert.assertEquals(
+                outStream.toString().trim(),
+                "Ввод закончился, ожидалась строка"
+        );
     }
 
     @Test(dataProvider = "inputNotValidData")
