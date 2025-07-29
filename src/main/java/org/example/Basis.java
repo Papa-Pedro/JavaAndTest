@@ -28,64 +28,52 @@ public class Basis {
         String line = scanner.nextLine().trim();
         switch (line) {
             case "1" -> {
-                String message = readInput();
+                String message = InputRead.readString(scanner);
                 String result = "";
                 result = message;
                 System.out.println(result);
             }
-            case "2" -> printWithDeleteSeparation();
-            case "3" -> concatenationAndMultiply();
+            case "2" -> printWithDeleteSeparation(scanner, out);
+            case "3" -> concatenationAndMultiply(scanner, out);
             default -> System.out.println("Yor input wrong symbol");
         }
-        scanner.close();
     }
 
     //Concatenation with split at " \\| "
-    public static void printWithDeleteSeparation() {
-        String[] inputMessages = readInput().split(" \\| ");
+    public static void printWithDeleteSeparation(Scanner scanner, PrintStream out) {
+        String[] inputMessages = InputRead.readString(scanner, out).split(" \\| ");
         String message1, message2;
         message1 = inputMessages[0];
         message2 = inputMessages[1];
         String result = String.format("%s %s", message1, message2);
-        System.out.println(result);
+        out.println(result);
     }
 
     /**
      * Concatenation 2 variables (message and score),
      * split by  " \\| " and multiply score on 2
      */
-    public static void concatenationAndMultiply(){
-        String[] inputValue = readInput().split(" \\| ");
+    public static void concatenationAndMultiply(Scanner scanner, PrintStream out){
+        String[] inputValue = InputRead.readString(scanner, out).split(" \\| ");
         String message = inputValue[0];
         int score = Integer.parseInt(inputValue[1]);
         String result = String.format("%s %d", message, score * 2 );
-        System.out.println(result);
+        out.println(result);
     }
 
-    /** Concatenation 2 variables (message and score),
+    /**
+     * Concatenation 2 variables (message and score),
      * split by  " \\| " and multiply score on bonus
      */
-    public static void concatenationAndBonus(){
+    public static void concatenationAndBonus(Scanner scanner, PrintStream out){
         String message;
         int score, bonus;
-
-        String[] inputValue = readInput().split(" \\| ");
+        String[] inputValue = InputRead.readString(scanner, out).split(" \\| ");
         message = inputValue[0];
         score = Integer.parseInt(inputValue[1]);
         bonus = Integer.parseInt(inputValue[2]);
         String result = message + " " + score * bonus;
-        System.out.println(result);
-    }
-
-    /**
-     * Function for read inside console
-     * @return nextLine
-     */
-    public static String readInput(){
-        Scanner scanner = new Scanner(System.in);
-        String inputLine = scanner.nextLine();
-        scanner.close();
-        return inputLine;
+        out.println(result);
     }
 
 }

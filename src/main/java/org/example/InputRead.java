@@ -89,6 +89,7 @@ public final class InputRead {
                 return parseStringStrict(line);
             } catch (IllegalArgumentException e) {
                 out.printf("«%s» — некорректная строка, повторите ввод.%n", line.trim());
+                throw e;
             }
         }
     }

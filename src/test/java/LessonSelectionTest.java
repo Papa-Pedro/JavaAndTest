@@ -15,7 +15,18 @@ import static org.testng.AssertJUnit.assertTrue;
 public class LessonSelectionTest {
 
     @Test(dataProvider = "setOfSelection")
-    public void callBasisClassTest(String inputChoose) {
+    public void checkChooseInput  (String inputChoose, String expectedLabel) {
+        FakeIO io = FakeIO.of(inputChoose);
+        LessonSelection selection = new LessonSelection(io.scanner(), io.out());
+        selection.run();
+        String output = io.output();
+        System.out.println("!!!!" + output);
+        assertTrue("Wrong tittle", output.contains("Choose lesson from stepic \"Java Тренажер\""));
+        assertTrue("Меню должно содержать метку: " + expectedLabel, output.contains(expectedLabel));
+    }
+
+    @Test(dataProvider = "setOfSelection")
+    public void callBasisClassTest(String inputChoose, String expectedLabel) {
         FakeIO io = FakeIO.of(inputChoose);
         // 3. Создаём реальный сервис с подделками
         LessonSelection selection = new LessonSelection(io.scanner(), io.out());
@@ -35,12 +46,7 @@ public class LessonSelectionTest {
             selection.run();
             String output = io.output();
             assertTrue("Wrong tittle", output.contains("Choose lesson from stepic \"Java Тренажер\""));
-            assertTrue(output.contains(inputChoose.trim() + " - " +
-                    (inputChoose.startsWith("1") ? "Basis"
-                            : inputChoose.startsWith("2") ? "Operators"
-                            :                                 "Manager structure")
-            ));
-            // А вот в зависимости от первой цифры убеждаемся,
+            assertTrue("Меню должно содержать метку: " + expectedLabel, output.contains(expectedLabel));            // А вот в зависимости от первой цифры убеждаемся,
             // что вызвался именно нужный мок
             char choice = inputChoose.charAt(0);
             if (choice == '1') {
@@ -59,9 +65,9 @@ public class LessonSelectionTest {
     @DataProvider(name = "setOfSelection")
     private Object[][] provideSelectionData() {
         return new Object[][] {
-                {"1\n0\n"},
-                {"2\n0\n"},
-                {"3\n0\n"}
+                {"1\n0\n", "Basis"},
+                {"2\n0\n", "Operators"},
+                {"3\n0\n", "Manager structure"}
         };
     }
 }
