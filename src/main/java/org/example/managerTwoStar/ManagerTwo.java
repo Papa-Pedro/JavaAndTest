@@ -50,4 +50,20 @@ public class ManagerTwo {
         int result = CalculateManagerTwoStar.amountOfViolation(n);
         out.println(result);
     }
+
+    /**
+     * Две переменные:
+     * message(строка с маленькими буквами) and k(целое число со значениями от -100 000 до 100 000
+     * Код должен выполнять следующие действия в зависимости от k:
+     * k - положительное: строка message должна вывестить k раз
+     * k - отрицательное: S повторённая n раз  == message, найти S
+     *                        (корень степени k из строки message)
+     * если корня найти не возможно - NO SOLUTION
+     * k - 0            : пустая строка
+     */
+    public void findStringRoot() {
+        String message;
+        int k;
+    }
+
 }

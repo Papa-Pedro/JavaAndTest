@@ -6,7 +6,9 @@ import java.util.function.Consumer;
 
 public enum ManagerTwoEnum {
 
-    MIX_UP_HATS(1, "How many ways can you mix up the hats?", ManagerTwo::mixUpHats);
+    MIX_UP_HATS(1, "How many ways can you mix up the hats?", ManagerTwo::mixUpHats),
+    STRING_ROOT(2, "Try to find string use root",            ManagerTwo::findStringRoot);
+
 
     public void execute(ManagerTwo managerTwo) {
         action.accept(managerTwo);

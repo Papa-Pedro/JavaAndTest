@@ -1,5 +1,6 @@
 package org.example;
 
+import resourse.Pair;
 import resourse.Trio;
 
 import java.io.PrintStream;
@@ -42,9 +43,11 @@ public final class InputRead {
     /**
      * Проверяем что столько "слов", сколько нам нужно переменных
      */
-    public static void defineSize(String[] parts, int size) {
-        if (parts.length > size) throw new IllegalArgumentException();
-    }
+        public static void defineSize(String[] parts, int size) {
+            if (parts.length > size) throw new IllegalArgumentException(
+                    "Ожидалось " + size + " значения(ий), а введено: " + parts.length
+            );
+        }
 
     //-------------- UI-LEVEL PROMPTS (интерактив с пользователем) ---------
     /**
@@ -94,6 +97,46 @@ public final class InputRead {
         }
     }
 
+    public static int[] readInputArray(){
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.hasNextLine()) {
+            return Arrays.stream(scanner.nextLine().split("\\s+"))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+        } else throw new NumberFormatException("Нет доступных строк для чтения");
+    }
+
+    /**
+     * Ждем на вход два символа нужного типа, читаем символы и записываем их в Pair
+     * @return объект Pair
+     */
+    public static Pair readPair(Scanner scanner, PrintStream out) {
+        String line;
+        while (true) {
+            //Проверка на непустую строку
+            try {
+                line = readString(scanner);
+            } catch (NoSuchElementException e) {
+                out.println("Ввод закончился, ожидалась строка");
+                throw e;
+            }
+            //Проверка что строка не из пробелов
+            try {
+                line = parseStringStrict(line);
+            } catch (IllegalArgumentException e) {
+                out.printf("«%s» — некорректная строка, повторите ввод.%n", line.trim());
+                throw e;
+            }
+            String[] parts = line.split("\\s+", 2);
+            try {
+                defineSize(parts, 2);
+                return new Pair(parts[0], parts[1]);
+            } catch (IllegalArgumentException e) {
+                out.println(e.getMessage());
+            }
+        }
+    }
+
     /**
      * Ждем на вход три символа нужного типа, читаем эти символы как строки и записываем их в Trio
      * @param scanner -  - для работы с stream input
@@ -121,18 +164,9 @@ public final class InputRead {
                 defineSize(parts, 3);
                 return new Trio(parts[0], parts[1], parts[2]);
             } catch (IllegalArgumentException e) {
-                out.printf("Ожидалось 3 значения, а введено: " + parts.length);
+                out.println(e.getMessage());
             }
         }
-    }
-
-    public static int[] readInputArray(){
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()) {
-            return Arrays.stream(scanner.nextLine().split("\\s+"))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
-        } else throw new NumberFormatException("Нет доступных строк для чтения");
     }
 
 }
