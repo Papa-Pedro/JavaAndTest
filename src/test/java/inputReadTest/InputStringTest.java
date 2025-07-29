@@ -17,7 +17,7 @@ public class InputStringTest {
         //Готовимся симулировать ввод с символами и переводом строки
         FakeIO fakeIO = FakeIO.of(inputData);
         //Вызываем readString и проверяем что вернется то же самое
-        String result = InputRead.readString(fakeIO.scanner(), fakeIO.out());//Basis.readInput();
+        String result = InputRead.readString(fakeIO.scanner(), fakeIO.out());
         Assert.assertEquals(result, inputData, "readInput должен вернуть ровно ту строку, что мы дали на вход");
     }
 

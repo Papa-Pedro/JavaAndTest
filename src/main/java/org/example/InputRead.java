@@ -44,8 +44,8 @@ public final class InputRead {
      * Проверяем что столько "слов", сколько нам нужно переменных
      */
         public static void defineSize(String[] parts, int size) {
-            if (parts.length > size) throw new IllegalArgumentException(
-                    "Ожидалось " + size + " значения(ий), а введено: " + parts.length
+            if (parts.length < size) throw new IllegalArgumentException(
+                    "Ожидалось минимум " + size + " значения(ий), а введено: " + parts.length
             );
         }
 
@@ -133,6 +133,7 @@ public final class InputRead {
                 return new Pair(parts[0], parts[1]);
             } catch (IllegalArgumentException e) {
                 out.println(e.getMessage());
+                throw e;
             }
         }
     }
